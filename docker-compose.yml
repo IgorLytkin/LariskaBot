@@ -16,10 +16,10 @@ services:
             - SCHAT_ID=${SCHAT_ID}
 
         ports:
-            - "443:443"
+            - "4430:4430"
 
         volumes:
-          - ./logs:/home/liv/LariskaBot/logs
+          - '/root:/logs:rw'
 
         restart: on-failure
 
