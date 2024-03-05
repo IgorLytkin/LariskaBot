@@ -14,12 +14,10 @@ services:
             - VCHAT_ID=${VCHAT_ID}
             - DCHAT_ID=${DCHAT_ID}
             - SCHAT_ID=${SCHAT_ID}
-
-        ports:
-            - "4430:4430"
+            - DEBUG=1
 
         volumes:
-          - '/root:/logs:rw'
+         - "/lariska_bot_data"
 
         restart: on-failure
 
