@@ -2,7 +2,8 @@ from datetime import datetime, timedelta
 from random import choice
 
 import pytz
-from aiogram import types
+import aiogram
+# from aiogram import types
 # from aiogram.dispatcher.filters import Text
 
 from lariska_bot import (MESSAGES, REPLICAS, USERS, WORKS_CHATS,
