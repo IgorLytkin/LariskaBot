@@ -3,12 +3,14 @@ FROM python:3.11.2-slim
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
-WORKDIR LariskaBot
+# Set the working directory in the container to /LariskaBot
+WORKDIR /LariskaBot
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r ./requirements.txt
 
-COPY lariska_bot ./lariska_bot
+# Add the current directory contents into the container at /LariskaBot
+COPY . /LariskaBot
 
 CMD ["python", "-m", "lariska_bot"]
 

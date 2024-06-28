@@ -1,28 +1,27 @@
-version: '3.9'
-
 services:
-
   lariska_bot:
-        container_name: LariskaBot
-        image: lariska_bot
+    container_name: LariskaBot
+    image: lariska_bot
 
-        build: .
+    build: .
 
-        environment:
-            - BOT_TOKEN=${BOT_TOKEN}
-            - AI_KEY=${AI_KEY}
-            - VCHAT_ID=${VCHAT_ID}
-            - DCHAT_ID=${DCHAT_ID}
-            - SCHAT_ID=${SCHAT_ID}
-            - DEBUG=1
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - AI_KEY=${AI_KEY}
+      - VCHAT_ID=${VCHAT_ID}
+      - DCHAT_ID=${DCHAT_ID}
+      - SCHAT_ID=${SCHAT_ID}
+      - DEBUG=1
 
-        volumes:
-         - "/lariska_bot_data"
+    volumes:
+      - "/logs"
+      - "/lariska_bot_data"
 
-        restart: on-failure
+    restart: on-failure
 
 volumes:
   logs:
+  lariska_bot_data:
 
 
 # -------------------------------
