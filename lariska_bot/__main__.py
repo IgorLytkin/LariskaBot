@@ -1,6 +1,7 @@
+import aiogram
 import logging
 from pathlib import Path
-from aiogram.utils.executor import start_polling
+
 from lariska_bot.handlers.handler import *
 
 logger = logging.getLogger(__name__)

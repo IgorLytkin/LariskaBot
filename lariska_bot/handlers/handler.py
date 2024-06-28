@@ -3,7 +3,7 @@ from random import choice
 
 import pytz
 from aiogram import types
-from aiogram.dispatcher.filters import Text
+# from aiogram.dispatcher.filters import Text
 
 from lariska_bot import (MESSAGES, REPLICAS, USERS, WORKS_CHATS,
                          BOT_FIRST_NAME, RATING_LIMIT, FLOOD_RATE, L_USERS)
