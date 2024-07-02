@@ -1,20 +1,26 @@
-import aiogram
 import logging
-from pathlib import Path
+from aiogram import Bot, Dispatcher, F
+from aiogram.client.default import DefaultBotProperties
+from aiogram.fsm.storage.memory import MemoryStorage
 
-from lariska_bot.handlers.handler import *
+from lariska_bot import TOKEN
 
 logger = logging.getLogger(__name__)
-def main():
-    log_name = f'/logs/{datetime.now().strftime("%Y-%m-%d")}.log'
-    Path(log_name).parent.mkdir(parents=True, exist_ok=True)
+storage = MemoryStorage()
+dp = Dispatcher() # Подготовка диспетчера
 
-    logging.basicConfig(level=logging.DEBUG,filename=log_name,filemode="a")
-
-    logger.info('Запуск бота')
-    logger.debug('Пишем сообщения в ' + log_name)
-    logger.debug('Запуск опроса')
-    start_polling(dp, skip_updates=True)
 
 if __name__ == '__main__':
-    main()
+    # Конфигурируем логирование
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(filename)s:%(lineno)d #%(levelname)-8s '
+               '[%(asctime)s] - %(name)s - %(message)s')
+    # Инициализируем бот и диспетчер
+    logger.debug('Инициализируем бот')
+    bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode='HTML'))
+    logger.debug('Бот инициализирован')
+
+    logger.info('Запуск бота')
+    logger.debug('Запускаем диспетчер')
+    dp.run_polling(bot)

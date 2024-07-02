@@ -1,61 +1,65 @@
+import logging
+from aiogram import F
+from aiogram.types import Message
+import pytz
 from datetime import datetime, timedelta
 from random import choice
+from lariska_bot import (MESSAGES, REPLICAS, USERS, WORKS_CHATS,BOT_FIRST_NAME, RATING_LIMIT, FLOOD_RATE, L_USERS)
+from lariska_bot.handlers.controllers import (flood_controlling, get_answer, get_ai_answer)
+from lariska_bot.__main__ import dp
 
-import pytz
-import aiogram
-# from aiogram import types
-# from aiogram.dispatcher.filters import Text
+logger = logging.getLogger(__name__)
 
-from lariska_bot import (MESSAGES, REPLICAS, USERS, WORKS_CHATS,
-                         BOT_FIRST_NAME, RATING_LIMIT, FLOOD_RATE, L_USERS)
-from lariska_bot.dispatcher import dp
-from lariska_bot.handlers.controllers import (flood_controlling, get_answer,
-                                              get_ai_answer)
-
-
-@dp.message_handler(Text(contains=['говно'], ignore_case=True))
-async def skirmish_reply(message: types.Message):
+@dp.message_handler(F.Text.contains('говно'))
+async def skirmish_reply(message: Message):
     await message.reply(MESSAGES['skirmish'])
 
 
-@dp.message_handler(Text(contains=['привет', 'с чего начать'],
-                         ignore_case=True))
-async def hello_where_to_reply(message: types.Message):
+@dp.message_handler(F.Text.contains('привет', 'с чего начать'))
+async def hello_where_to_reply(message: Message):
     await message.reply(MESSAGES['hello'])
     await message.answer(MESSAGES['start_here'])
     await message.answer(MESSAGES['start_video'])
     await message.answer(MESSAGES['message_links'])
 
 
-@dp.message_handler(Text(contains=['привет'], ignore_case=True))
-async def hello_reply(message: types.Message):
+@dp.message_handler(F.Text.contains('привет'))
+async def hello_reply(message: Message):
     await message.reply(MESSAGES['hello'])
 
 
-@dp.message_handler(Text(contains=['с чего начать'], ignore_case=True))
-async def where_to_begin(message: types.Message):
+@dp.message_handler(F.Text.contains('с чего начать'))
+async def where_to_begin(message: Message):
     await message.reply(MESSAGES['start_here'])
     await message.answer(MESSAGES['start_video'])
     await message.answer(MESSAGES['message_links'])
 
 
-@dp.message_handler(Text(contains=['https://t.me/oldcoders_bar'],
-                         ignore_case=True))
-async def bar_reply(message: types.Message):
+@dp.message_handler(F.Text.contains('https://t.me/oldcoders_bar'))
+async def bar_reply(message: Message):
     await message.reply(choice(REPLICAS['bar']))
 
 
-@dp.message_handler(commands=['start', 'help'])
-async def send_welcome(message: types.Message):
-    await message.answer(
-        MESSAGES['welcome'], parse_mode=types.ParseMode.MARKDOWN)
+@dp.message_handler(F.CommandStart)
+async def send_welcome(message: Message):
+    await message.answer(MESSAGES['welcome'])
 
 
-@dp.message_handler(content_types=types.ContentTypes.TEXT)
+@dp.message_handler(F.text)
 @dp.throttled(flood_controlling, rate=FLOOD_RATE)
-async def text_reply(message: types.Message):
+async def text_reply(message: Message):
+    logger.debug(f'Message: {message.text}')
     username = message.from_user.username
+    userid = message.from_user.id
+
+    # Если имя пользователя Телеграмм пустое создаем имя пользователя из userid
+    if username is None:
+        username = 'User_' + str(userid)
+
     user_day = USERS.get(username)
+    logging.debug(f'User id:  {userid}')
+    logging.debug(f'User name:  {username}')
+    logging.debug(f'User day:  {user_day}')
 
     tz = pytz.timezone('Europe/Moscow')
     present_date = datetime.now(tz)
@@ -87,6 +91,6 @@ async def text_reply(message: types.Message):
             await message.reply(choice(REPLICAS['n_users']))
 
 
-@dp.message_handler(content_types=types.ContentTypes.PHOTO)
-async def photo_reply(message: types.Message):
+@dp.message_handler(F.photo)
+async def photo_reply(message: Message):
     await message.reply(choice(REPLICAS['photo_reply']))
