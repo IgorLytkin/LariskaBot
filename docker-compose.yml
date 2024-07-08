@@ -16,7 +16,7 @@ services:
     volumes:
       - "/lariska_bot_data"
 
-    restart: on-failure
+    restart: no
 
 volumes:
   lariska_bot_data:

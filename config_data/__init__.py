@@ -23,23 +23,23 @@ MODEL = 'gpt-3.5-turbo'
 
 # Используем safe-загрузку YAML-файлов
 yaml = YAML(typ='safe')
-with open('lariska_bot/res/answers.yaml', 'r',encoding='utf-8') as file:
+with open('res/answers.yaml', 'r',encoding='utf-8') as file:
     answers_data = yaml.load(file)
 ANSWERS = {x: y.replace(r'\n', '\n') for x, y in answers_data.items()}
 
-with open('lariska_bot/res/l_users.yaml', 'r',encoding='utf-8') as file:
+with open('res/l_users.yaml', 'r',encoding='utf-8') as file:
     users_data = yaml.load(file)
 L_USERS = {x: 0 for x in users_data}
 
-with open('lariska_bot/res/messages.yaml', 'r',encoding='utf-8') as file:
+with open('res/messages.yaml', 'r',encoding='utf-8') as file:
     messages_data = yaml.load(file)
 MESSAGES = {x: y.replace(r'\n', '\n') for x, y in messages_data.items()}
 
-with open('lariska_bot/res/replicas.yaml', 'r',encoding='utf-8') as file:
+with open('res/replicas.yaml', 'r',encoding='utf-8') as file:
     replicas_data = yaml.load(file)
 REPLICAS = {x: [z.replace(r'\n', '\n') for z in y] for x, y in replicas_data.items()}
 
-with open('lariska_bot/res/users.yaml', 'r',encoding='utf-8') as file:
+with open('res/users.yaml', 'r',encoding='utf-8') as file:
     users_data = yaml.load(file)
 USERS = {x: 0 for x in users_data}
 

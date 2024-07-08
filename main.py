@@ -1,8 +1,9 @@
-import logging
 import sys
+import logging
 
 from aiogram import Bot,Dispatcher
 from aiogram.client.default import DefaultBotProperties
+
 from config_data.config import Config, load_config
 from handlers.handler import router
 

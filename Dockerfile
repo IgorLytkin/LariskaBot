@@ -6,11 +6,12 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Set the working directory in the container to /LariskaBot
 WORKDIR /app
 COPY requirements.txt .
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Add the current directory contents into the container at /LariskaBot
 COPY . /app
-CMD ["python", "-m", "lariska_bot"]
+CMD ["python", "-m", "main"]
 
 # -------------------------------
 # Build an image from a Dockerfile:

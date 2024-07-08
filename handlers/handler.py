@@ -9,9 +9,9 @@ import pytz
 from datetime import datetime, timedelta
 from random import choice
 
-from lariska_bot.config_data import (MESSAGES, REPLICAS, USERS, WORKS_CHATS,
-                                     BOT_FIRST_NAME, RATING_LIMIT, L_USERS)
-from lariska_bot.handlers.controllers import (get_answer, get_ai_answer)
+from config_data import (MESSAGES, REPLICAS, USERS, WORKS_CHATS,
+                         BOT_FIRST_NAME, RATING_LIMIT, L_USERS)
+from handlers.controllers import (get_answer, get_ai_answer)
 
 
 logger = logging.getLogger(__name__)

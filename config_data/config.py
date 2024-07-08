@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from lariska_bot.config_data import TOKEN
+from config_data import TOKEN
 
 
 @dataclass

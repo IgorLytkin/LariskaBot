@@ -5,7 +5,7 @@ import openai
 import requests
 from fuzzywuzzy import fuzz
 
-from lariska_bot.config_data import (AI_KEY, MESSAGES, PREFIX_QUESTION, ANSWERS, MODEL)
+from config_data import (AI_KEY, MESSAGES, PREFIX_QUESTION, ANSWERS, MODEL)
 
 logger = logging.getLogger(__name__)
 openai.api_key = AI_KEY
